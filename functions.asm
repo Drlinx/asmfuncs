@@ -4,8 +4,8 @@
 
 extern printf           ; Declares printf for use later
 section .data
-    number dq 5         ;The number we are finding the factorial of .
-    msg db "The factorial of 5 is %ld", 10, 0   ;The message we will print.
+    radius db 10
+    pi dq 3.14159
 section .bss
 
 section .text
@@ -14,10 +14,21 @@ section .text
 
 main:
 
+    call circle
+
+    mov rax, 60     ; Exit
+    mov rdi, 0      ; Exit status
+    syscall         ; Calls the above 2.
+
+
+area: 
+    section .data
+    .fmt_area db "The area is %f", 10, 0 ; string we will be printing
+    section .text
     push rbp            ; Initiates the printf call.
     mov rbp, rsp
-    mov rdi, msg        ; The string.
-    mov rsi, rax        ; The result of 5!.
+    mov rdi, .fmt_area        ; The string.
+    mov rsi, rax        ; The result of .
     mov rax, 0          ; Print out to the terminal.
 
     call printf         ; Calls printf.
@@ -25,6 +36,23 @@ main:
     pop rbp
     ret             ; Cleans up the printf call.
 
-    mov rax, 60     ; Exit
-    mov rdi, 0      ; Exit status
-    syscall         ; Calls the above 2.
+circum:
+    section .data
+    .fmt_circum db "the circumference is %f" 10 0
+    section .text
+
+
+circle:
+    section .data
+    fmt_raduis db "the circle has a radius of %f" 10 0
+    section .text
+    push rbp            ; Initiates the printf call.
+    mov rbp, rsp
+    mov rdi, .fmt_area        ; The string.
+    mov rsi, [radius]        ; The radius.
+    mov rax, 0          ; Print out to the terminal.
+
+    call printf         ; Calls printf.
+    mov rsp, rbp
+    pop rbp
+    ret             ; Cleans up the printf call.
