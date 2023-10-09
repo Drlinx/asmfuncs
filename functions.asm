@@ -15,17 +15,10 @@ section .text
 
 main:
 
-    ; mov rdi, tes ; first argument for printf
-    ; mov rsi, 50 ; second argument for printf
-    ; mov rax, 0 ; no xmm registers involved
-
-    ; call printf ; call the function
-
     call circle
 
-    mov rsp, rbp
-    pop rbp
-    ret 
+    ; mov rsp, rbp
+    ; pop rbp
     
     mov rax, 60     ; Exit
     mov rdi, 0      ; Exit status
@@ -37,6 +30,17 @@ area:
     .fmt_area db "The area is %f", 10, 0 ; string we will be printing
     section .text
 
+    movsd xmm0, [radius]
+    mulsd xmm0, [radius]
+    mulsd xmm0, [pi]
+
+    push rbp
+    mov rbp, rsp
+    mov rax, 1 ; 1 xmm registers involved
+
+    mov rdi, .fmt_area ; first argument for printf   
+    call printf ; call the function
+
 
 
     ret ; breaks the function
@@ -44,41 +48,39 @@ area:
 circum:
     ; enter
     section .data
-        .fmt_circum db "the circumference is %f %f", 10, 0 ; string we will be printing
+        .fmt_circum db "the circumference is %f", 10, 0 ; string we will be printing
     section .text
 
+
     movsd xmm0, [radius]
-    movsd xmm1, [two]
-    mulsd xmm0, xmm1
+    mulsd xmm0, [two]
     mulsd xmm0, [pi]
 
-    mov rax, 2 ; 1 xmm registers involved
+    push rbp
+    mov rbp, rsp
+    mov rax, 1 ; 1 xmm registers involved
 
     mov rdi, .fmt_circum ; first argument for printf   
     call printf ; call the function
-    ret
+
+    ret ; exits out of function
 
 
 circle:  
     section .data
-        fmt_raduis db "the circle has a radius of %f", 10, 0
+        .fmt_raduis db "the circle has a radius of %f", 10, 0
     section .text
 
-    ; mov rax, [radius]
 
     movsd xmm0, [radius]; prepares the xmm register
 
-    ; mov rax, 1 ; no xmm registers involved
-    ; mov rdi, fmt_raduis ; first argument for printf   
-    ; call printf ; call the function
+    mov rax, 1 ; no xmm registers involved
+    mov rdi, .fmt_raduis ; first argument for printf   
+    call printf ; call the function
 
-    ; mov rsp, rbp
-    ; pop rbp
-    ; ret             ; Cleans up the printf call
 
     call circum
 
-    ; call area
-    ; leave
-    ret             ; Cleans up the printf call.
+    call area
+    ret             ; Exits out of function
 
