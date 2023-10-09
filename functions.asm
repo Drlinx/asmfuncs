@@ -42,7 +42,7 @@ area:
     call printf ; call the function
 
 
-
+    leave
     ret ; breaks the function
 
 circum:
@@ -63,6 +63,7 @@ circum:
     mov rdi, .fmt_circum ; first argument for printf   
     call printf ; call the function
 
+    leave
     ret ; exits out of function
 
 
@@ -82,5 +83,7 @@ circle:
     call circum
 
     call area
+    
+    leave
     ret             ; Exits out of function
 
