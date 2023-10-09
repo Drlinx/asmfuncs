@@ -36,6 +36,8 @@ area:
     pop rbp
     ret             ; Cleans up the printf call.
 
+    ret ; breaks the function
+
 circum:
     section .data
     fmt_circum db "the circumference is %f", 20, 0
@@ -51,6 +53,8 @@ circum:
     pop rbp
     ret             ; Cleans up the printf call.
 
+    ret
+
 circle:
     section .data
     fmt_raduis db "the circle has a radius of %f", 10, 0
@@ -64,5 +68,7 @@ circle:
     call printf         ; Calls printf.
     mov rsp, rbp
     pop rbp
+    ret             ; Cleans up the printf call.
+
     ret             ; Cleans up the printf call.
 
