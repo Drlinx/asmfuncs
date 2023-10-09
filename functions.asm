@@ -38,17 +38,11 @@ area:
 
 circum:
     section .data
-    .fmt_circum db "the circumference is %f" 10 0
-    section .text
-
-
-circle:
-    section .data
-    fmt_raduis db "the circle has a radius of %f" 10 0
+    fmt_circum db "the circumference is %f", 20, 0
     section .text
     push rbp            ; Initiates the printf call.
     mov rbp, rsp
-    mov rdi, .fmt_area        ; The string.
+    mov rdi, fmt_circum        ; The string.
     mov rsi, [radius]        ; The radius.
     mov rax, 0          ; Print out to the terminal.
 
@@ -56,3 +50,19 @@ circle:
     mov rsp, rbp
     pop rbp
     ret             ; Cleans up the printf call.
+
+circle:
+    section .data
+    fmt_raduis db "the circle has a radius of %f", 10, 0
+    section .text
+    push rbp            ; Initiates the printf call.
+    mov rbp, rsp
+    mov rdi, fmt_raduis        ; The string.
+    mov rsi, [radius]        ; The radius.
+    mov rax, 0          ; Print out to the terminal.
+
+    call printf         ; Calls printf.
+    mov rsp, rbp
+    pop rbp
+    ret             ; Cleans up the printf call.
+
