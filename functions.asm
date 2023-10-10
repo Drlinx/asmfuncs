@@ -1,12 +1,12 @@
 ; Name: Kassidy Maberry
-; Date: 2023/12/05
+; Date: 2023/10/16
 ; Assignment: Functions Assembly
 
 extern printf           ; Declares printf for use later
 section .data
     radius dq 10.0 ; The raduis of the circle
     pi dq 3.14159 ; Pi
-    two dq 2.0 ; The number 2 as a float
+    two dq 2.0 ; The number 2 as a float. I can't directly feed 2.0 into a xmm register
 section .bss
 
 section .text
