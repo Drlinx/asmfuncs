@@ -1,6 +1,6 @@
-functions: functions.o
-	gcc -o functions functions.o -no-pie
-functions.o:
-	nasm -f elf64 -g -F dwarf functions.asm -l functions.lst -o functions.o
+KassidyMaberryfunctions: KassidyMaberryfunctions.o
+	gcc -o KassidyMaberryfunctions KassidyMaberryfunctions.o -no-pie
+KassidyMaberryfunctions.o:
+	nasm -f elf64 -g -F dwarf KassidyMaberryfunctions.asm -l KassidyMaberryfunctions.lst -o KassidyMaberryfunctions.o
 clean:
-	rm ./functions ./functions.lst ./functions.o
+	rm ./KassidyMaberryfunctions ./KassidyMaberryfunctions.lst ./KassidyMaberryfunctions.o
