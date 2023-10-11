@@ -76,6 +76,7 @@ circle:
     movsd xmm0, [radius]; Places raduis into the xmm register
 
     mov rax, 1 ; 1 xmm registers involved
+    ; xmm is the arguement for the %f
     mov rdi, .fmt_raduis ; first argument for printf   
     call printf ; call the function
 
